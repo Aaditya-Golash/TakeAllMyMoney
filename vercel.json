@@ -1,0 +1,26 @@
+{
+  "functions": {
+    "api/stripe/webhook": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/stripe/webhook",
+      "methods": ["POST"],
+      "dest": "/api/stripe/webhook"
+    }
+  ],
+  "overrides": [
+    {
+      "path": "api/stripe/webhook",
+      "methods": ["POST"],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": {
+        "parser": "raw"
+      }
+    }
+  ]
+}
