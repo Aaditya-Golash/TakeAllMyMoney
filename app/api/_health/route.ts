@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return NextResponse.json({
     ok: true,
@@ -9,4 +11,3 @@ export async function GET() {
     dbUrl: !!process.env.DATABASE_URL,
   });
 }
-

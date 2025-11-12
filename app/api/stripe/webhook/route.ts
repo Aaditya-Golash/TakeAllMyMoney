@@ -3,6 +3,8 @@ import Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 import { sql } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   const sig = req.headers.get('stripe-signature') as string;
   const buf = await req.arrayBuffer();

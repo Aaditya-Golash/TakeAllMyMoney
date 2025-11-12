@@ -3,6 +3,8 @@ import { getTotals } from '@/lib/leaderboard';
 
 type Period = '24h' | '7d' | 'all';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const period = (searchParams.get('period') as Period) || '24h';

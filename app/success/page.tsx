@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import PixelButton from '@/components/PixelButton';
 import { useSearchParams } from 'next/navigation';
 
-export default function SuccessPage() {
+function SuccessContent() {
   const search = useSearchParams();
   const amount = useMemo(() => parseInt(search.get('amount') || '100', 10) || 100, [search]);
   const [intensity, setIntensity] = useState(10);
@@ -12,7 +12,6 @@ export default function SuccessPage() {
     setIntensity(Math.min(Math.floor(amount / 100) + 5, 50));
   }, [amount]);
 
-  // Precompute drop positions/timing for deterministic client render
   const drops = useMemo(() => {
     return Array.from({ length: intensity }).map((_, i) => ({
       id: i,
@@ -48,3 +47,13 @@ export default function SuccessPage() {
     </div>
   );
 }
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center">Loading…</div>}>
+      <SuccessContent />
+    </Suspense>
+  );
+}
+
+export const dynamic = 'force-dynamic';
