@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import { Pool, QueryResultRow } from 'pg';
 
 const isLocal =
   process.env.DATABASE_URL?.includes('localhost') ||
@@ -9,8 +9,7 @@ export const pool = new Pool({
   ssl: isLocal ? false : { rejectUnauthorized: false },
 });
 
-export async function sql<T = any>(text: string, params: any[] = []) {
+export async function sql<T extends QueryResultRow = QueryResultRow>(text: string, params: any[] = []) {
   const res = await pool.query<T>(text, params);
-  return res.rows as unknown as T[];
+  return res.rows;
 }
-
