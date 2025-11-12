@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <StatsMarquee />
       <ThrowPanel />
-      <a href="#board" className="underline mt-4 inline-block">View leaderboard =></a>
+      <a href="#board" className="underline mt-4 inline-block">View leaderboard →</a>
       <Leaderboard />
     </>
   );
