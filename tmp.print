@@ -1,0 +1,24 @@
+export type Tier = {
+  name: string;
+  min: number;
+  emoji: string;
+  colorClass: string; // Tailwind class for text color
+};
+
+const TIERS: Tier[] = [
+  { name: 'Fan', min: 2, emoji: '💸', colorClass: 'text-midnight' },
+  { name: 'High Roller', min: 50, emoji: '🔥', colorClass: 'text-royal' },
+  { name: 'Whale', min: 200, emoji: '🐳', colorClass: 'text-cherry' },
+  { name: 'Rich AF', min: 1000, emoji: '💎', colorClass: 'text-cherry' },
+];
+
+export function getTierForAmount(amountUsd: number): Tier | null {
+  if (!Number.isFinite(amountUsd) || amountUsd < 2) return null;
+  let best: Tier | null = null;
+  for (const t of TIERS) {
+    if (amountUsd >= t.min) best = t;
+  }
+  return best;
+}
+
+

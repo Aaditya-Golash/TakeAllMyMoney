@@ -1,0 +1,28 @@
+@import '../styles/globals.css';
+
+:root{
+  --bg:#F5EBDC;           /* cream Monopoly board */
+  --ink:#0E0E0E;
+  --accent:#FF5A59;       /* flappy-bird-ish red */
+}
+
+.bg-cream{ background:var(--bg); }
+.bg-ink{ background:var(--ink); }
+.text-ink{ color:var(--ink); }
+.fill-ink{ fill:var(--ink); }
+.fill-cream{ fill:var(--bg); }
+
+.font-arcade{ font-family: var(--font-arcade), system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+.bg-grid{
+  background:
+    linear-gradient(transparent 31px, rgba(0,0,0,.06) 32px),
+    linear-gradient(90deg, transparent 31px, rgba(0,0,0,.06) 32px);
+  background-size: 32px 32px;
+}
+
+/* Pixel look + press effect */
+.pixel { border:2px solid var(--ink); box-shadow:4px 4px 0 0 var(--ink); }
+.pixel:active { transform: translate(2px,2px); box-shadow:2px 2px 0 0 var(--ink); }
+
+.input { @apply border rounded px-3 py-2 w-full bg-white/90 border-black/80; }

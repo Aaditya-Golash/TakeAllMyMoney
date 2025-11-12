@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #F5EBDC;
+  --ink: #0E0E0E;
+  --accent: #FF5A59;
+  --shadow-pixel: 4px 4px 0px var(--ink);
+  --shadow-pixel-pressed: 2px 2px 0px var(--ink);
+}
+
+body {
+  background-color: #F8F2E7;
+  color: #000000; /* ensure all text appears black */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Pocket Splash UI utilities */
+.pixel-border { border: 2px solid var(--ink); }
+.shadow-pixel { box-shadow: var(--shadow-pixel); }
+.shadow-pixel-pressed { box-shadow: var(--shadow-pixel-pressed); }
+.grid-bg {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  opacity: 0.03;
+}
+.font-pixel { font-family: 'Press Start 2P', cursive; }
+
+@keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+/* ---- Pocket Splash animations ---- */
+@keyframes shake { 0%,100%{ transform: translateX(0) } 25%{ transform: translateX(-2px) } 75%{ transform: translateX(2px) } }
+.animate-shake { animation: shake 0.6s ease-in-out infinite; }
+
+@keyframes spin-slow { from{ transform: rotate(0deg) } to{ transform: rotate(360deg) } }
+.animate-spin-slow { animation: spin-slow 6s linear infinite; }
+
+@keyframes pulse-glow { 0%,100%{ box-shadow: 0 0 10px rgba(236,72,153,.3) } 50%{ box-shadow: 0 0 20px rgba(236,72,153,.6) } }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+@keyframes zoom-slow { 0%,100%{ transform: scale(1) } 50%{ transform: scale(1.02) } }
+.animate-zoom-slow { animation: zoom-slow 3s ease-in-out infinite; }
+
+@keyframes whale-dive { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(6px) } }
+.animate-whale-dive { animation: whale-dive 2.4s ease-in-out infinite; }
+
+@keyframes glitch { 0%{ transform: translate(0) } 20%{ transform: translate(-2px,1px) } 40%{ transform: translate(2px,-1px) } 60%{ transform: translate(-1px,2px) } 80%{ transform: translate(1px,-2px) } 100%{ transform: translate(0) } }
+.animate-glitch { animation: glitch 1s steps(2,end) infinite; }
+
+@keyframes matrix { 0%,100%{ filter: hue-rotate(0deg) } 50%{ filter: hue-rotate(90deg) } }
+.animate-matrix { animation: matrix 4s linear infinite; }
+
+@keyframes cosmic { 0%{ opacity:.85 } 50%{ opacity:1 } 100%{ opacity:.85 } }
+.animate-cosmic { animation: cosmic 2.5s ease-in-out infinite; }
+
+@keyframes stars { 0%,100% { background-position: 0% 50% } 50% { background-position: 100% 50% } }
+.animate-stars { animation: stars 10s linear infinite; }
+
+@keyframes slide-in-right { 0%{ transform: translateX(40px); opacity: 0 } 100%{ transform: translateX(0); opacity:1 } }
+.animate-slide-in-right { animation: slide-in-right .4s ease-out both; }
+
+@keyframes coin-rain { 0%{ transform: translateY(-120%); opacity:.8 } 100%{ transform: translateY(120%); opacity:0 } }
+.animate-coin-rain { animation: coin-rain 1.8s linear infinite; }
+
+@keyframes nuke-flash { 0%{ opacity:0 } 20%{ opacity:1 } 100%{ opacity:0 } }
+.nuke-screen { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0, rgba(255,200,0,.9) 25%, rgba(255,0,0,.6) 50%, rgba(0,0,0,.9) 100%); z-index: 50; pointer-events: none; animation: nuke-flash 1.6s ease-out both; }
+
+@keyframes money-burst { 0%{ transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity:1 } 50%{ opacity:1 } 100%{ transform: translate(-50%,-50%) translateX(200px) scale(1.5) rotate(360deg); opacity:0 } }
+.money-burst { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); animation: money-burst 1.5s ease-out forwards; }
+
+/* Falling cash used for loading/success */
+@keyframes burn-cash { 0%{ transform: translateY(-100%) rotate(0deg); opacity:0; filter:brightness(1) } 20%{ opacity:1 } 50%{ filter:brightness(1.5) hue-rotate(30deg) } 80%{ filter:brightness(2) hue-rotate(60deg); opacity:.5 } 100%{ transform: translateY(100vh) rotate(720deg); opacity:0; filter:brightness(0) hue-rotate(90deg) } }
+.animate-burn-cash { animation: burn-cash 4s ease-in-out infinite; }
