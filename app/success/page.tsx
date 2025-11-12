@@ -12,15 +12,25 @@ export default function SuccessPage() {
     setIntensity(Math.min(Math.floor(amount / 100) + 5, 50));
   }, [amount]);
 
+  // Precompute drop positions/timing for deterministic client render
+  const drops = useMemo(() => {
+    return Array.from({ length: intensity }).map((_, i) => ({
+      id: i,
+      leftPct: Math.floor(Math.random() * 100),
+      delay: i * 0.2,
+      duration: 3 + Math.random() * 2,
+    }));
+  }, [intensity]);
+
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-4 relative overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
       <div className="fixed inset-0 grid-bg pointer-events-none" />
       <div className="fixed inset-0 pointer-events-none z-0">
-        {Array.from({ length: intensity }).map((_, i) => (
+        {drops.map((d) => (
           <div
-            key={i}
+            key={d.id}
             className="absolute text-3xl animate-burn-cash"
-            style={{ left: `${Math.random()*100}%`, animationDelay: `${i*0.2}s`, animationDuration: `${3 + Math.random()*2}s` }}
+            style={{ left: `${d.leftPct}%`, animationDelay: `${d.delay}s`, animationDuration: `${d.duration}s` }}
           >
             💸
           </div>
@@ -38,4 +48,3 @@ export default function SuccessPage() {
     </div>
   );
 }
-
