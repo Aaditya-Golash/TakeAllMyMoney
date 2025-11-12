@@ -1,20 +1,18 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
 import { BigButton } from '@/components/BigButton';
 
 const presetAmounts = [1, 5, 10, 50];
-
 const handlePattern = /^[a-zA-Z0-9_]{2,20}$/;
 
 export default function HomePage() {
-  const [amount, setAmount] = useState<number>(5);
-  const [customAmount, setCustomAmount] = useState<string>('');
+  const [amount, setAmount] = useState(5);
+  const [customAmount, setCustomAmount] = useState('');
   const [handle, setHandle] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null as string | null);
 
   const isCustomSelected = useMemo(() => !presetAmounts.includes(amount), [amount]);
 
@@ -24,9 +22,7 @@ export default function HomePage() {
     try {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount,
           handle: handle.trim() ? handle.trim() : undefined,
@@ -41,9 +37,7 @@ export default function HomePage() {
       }
 
       const data = await response.json();
-      if (data?.url) {
-        window.location.href = data.url as string;
-      }
+      if (data?.url) window.location.href = data.url as string;
     } catch (err) {
       console.error(err);
       setError('Could not reach the money furnace.');
@@ -130,7 +124,9 @@ export default function HomePage() {
         </div>
 
         {handle.trim() && !handlePattern.test(handle.trim()) && (
-          <p className="text-sm font-mono text-cherry">Handle must be 2-20 letters, numbers, or underscores.</p>
+          <p className="text-sm font-mono text-cherry">
+            Handle must be 2-20 letters, numbers, or underscores.
+          </p>
         )}
         {error && <p className="text-sm font-mono text-cherry">{error}</p>}
 
