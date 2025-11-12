@@ -13,3 +13,6 @@ export default function BigButton({ children, className = '', ...props }: Props)
     </button>
   );
 }
+
+// Also export a named version for modules that import { BigButton }
+export { BigButton };
