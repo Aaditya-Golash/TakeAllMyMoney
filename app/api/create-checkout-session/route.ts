@@ -21,6 +21,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Stripe is not configured on the server' }, { status: 500 });
     }
 
+    const metadata = {
+      handle: String(handle || '').trim(),
+      message: String(message || '').trim(),
+    };
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
@@ -34,10 +39,8 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      metadata: {
-        handle: String(handle || ''),
-        message: String(message || ''),
-      },
+      payment_intent_data: { metadata },
+      metadata,
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')}/success?amount=${Math.floor(cents/100)}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')}`,
     });

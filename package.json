@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:init": "node scripts/init-db.js"
+    "db:init": "node scripts/init-db.js",
+    "backfill:stripe-meta": "node scripts/backfill-stripe-metadata.js"
   },
   "dependencies": {
     "pg": "^8.11.5",
